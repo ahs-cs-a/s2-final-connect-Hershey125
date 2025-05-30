@@ -51,21 +51,40 @@ public class Board  {
     
     //returns true if there are no more plays left
     public boolean boardFilled(){
-        //TODO: write this
-        return false; 
+        for(int i = 0; i<rows; i++){
+            for(int x =0; x<cols; x++){
+                if(grid[i][x] == null){
+                    return false;
+                }
+            }
+        }
+    return true;
     }
 
     // Returns true if move is possible given board state.  
     public boolean possibleMove(Move move) {
-        // TODO: write this.  Right now, it ignores filled columns, claiming any move is possible
-        return true;
+        for(int x =0; x<rows; x++){
+            if(grid[x][move.getColumn()] == null){
+                return true;
+            }
+
+        }
+        return false;
     }
     
     // Adds a piece to the board for a given Move
     public void addPiece(Move move) {
-        //TODO: this is a test stub, you need to rewrite this.
-    	grid[0][move.getColumn()] = move.getPlayer();
+        if(possibleMove(move)){
+            for(int x = 0; x<rows; x++){
+                if(grid[x][move.getColumn()] == null){
+                    grid[x][move.getColumn()] = move.getPlayer();
+                break;
+            }
+            }
+        }
     }
+
+    
 
     // if the board contains a winning position, returns the Player that wins.
     // Otherwise, returns null.  You could ignore lastMove.
